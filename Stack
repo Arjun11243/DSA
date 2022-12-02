@@ -1,0 +1,85 @@
+typedef struct stack
+{
+    float data[size];
+    int top;
+}stack;
+
+int isempty(stack *s)
+{
+    if(s->top==-1)
+    return 1;
+    else
+    return 0;
+}
+int isfull(stack *s)
+{
+    if(s->top==size-1)
+    return 1;
+    else
+    return 0;
+}
+void push(stack *s,float x)
+{
+    if(!isfull(s))
+    {
+        s->top=s->top+1;
+        s->data[s->top]=x;
+    }
+    else
+    {
+        printf("Stack Full");
+    }
+}
+float pop(stack *s)
+{
+    float x;
+    if(!isempty(s))
+    {
+        x=s->data[s->top];
+        s->top=s->top-1;
+    }
+    else
+    {
+        printf("Stack Empty");
+    }
+    return x; 
+}
+void display(stack *s)
+{
+    if(!isempty(s))
+    {
+        for(int i=s->top;i>=0;i--)
+        {
+            printf("%f\n",s->data[i]);
+        }
+    }
+    else
+    {
+        printf("Stack Empty");
+    }
+}
+void main()
+{
+    stack s;
+    s.top=-1;
+    int ch;
+    float x;
+    do
+    {
+        printf("1.push, 2.pop, 3.display, 4. exit \nEnter your Choice\t");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1: printf("\nEnter element to be pushed:\t");
+                    scanf("%f",&x);
+                    push(&s,x);
+                    break;
+            case 2: printf("\nElement popped = %f",pop(&s));
+                    break;
+            case 3: printf("\nThe Stack:\n");
+                    display(&s);
+                    break;
+            case 4: exit(0);
+        }
+    }while(1);
+}
